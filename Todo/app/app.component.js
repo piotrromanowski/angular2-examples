@@ -1,4 +1,4 @@
-System.register(['angular2/core', './todo/list.component', './todo/view.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './todo/list.component', './todo/view.component', './todo/detail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './todo/list.component', './todo/view.componen
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, list_component_1, view_component_1;
+    var core_1, list_component_1, view_component_1, detail_component_1;
     var AppComponent, TODO;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', './todo/list.component', './todo/view.componen
             },
             function (view_component_1_1) {
                 view_component_1 = view_component_1_1;
+            },
+            function (detail_component_1_1) {
+                detail_component_1 = detail_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -29,8 +32,9 @@ System.register(['angular2/core', './todo/list.component', './todo/view.componen
                     this.todos = [
                         { 'title': 'go shopping', 'complete': true, 'description': 'Get the following list of items 1. New Shirt for Formal 2. Get ingredients for chineese food' },
                         { 'title': 'go to gym', 'complete': false, 'description': 'Start on new workout routine. Perform the following exercies: Pushups (50), Squats, Bench, asaagsa' },
-                        { 'title': 'Do not forget', 'complete': false, 'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' }
+                        { 'title': 'Make sure to do the following', 'complete': false, 'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' }
                     ];
+                    this.activeTodo = null;
                     this.viewStatus = 'all';
                 }
                 AppComponent.prototype.filteredList = function () {
@@ -51,6 +55,9 @@ System.register(['angular2/core', './todo/list.component', './todo/view.componen
                 AppComponent.prototype.changeStatus = function (viewStatus) {
                     this.viewStatus = viewStatus;
                 };
+                AppComponent.prototype.getDetails = function (todo) {
+                    this.activeTodo = todo;
+                };
                 AppComponent.prototype.onComplete = function (todo) {
                     this.todos = this.todos.map(function (item) {
                         if (item === todo)
@@ -61,8 +68,8 @@ System.register(['angular2/core', './todo/list.component', './todo/view.componen
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "<h1>Angular2 TODOS</h1>\n               <div class='container'>\n                    <div class='row'>\n                        <view (changeStatus)='changeStatus($event)' [status]='viewStatus'></view>                       \n                    <div>\n                    <div class='row'>\n                        <div class='col-md-4'>\n                            <list [todos]='filteredList()' (onComplete)='onComplete($event)'></list>\n                        <div>\n                    </div>\n               </div>                     \n    ",
-                        directives: [list_component_1.List, view_component_1.View]
+                        template: "<h1>Angular 2 TODO App</h1>\n               <div class='container'>\n                    <div class='row'>\n                        <view (changeStatus)='changeStatus($event)' [status]='viewStatus'></view>                       \n                    <div>\n                    <div class='row'>\n                        <div class='col-md-4'>\n                            <list [todos]='filteredList()' (getDetails)='getDetails($event)' (onComplete)='onComplete($event)'></list>\n                        </div>\n                        <div class='col-md-6'>                          \n                            <detail [todo]=\"activeTodo\"></detail>\n                        </div>\n                    </div>\n               </div>                     \n    ",
+                        directives: [list_component_1.List, view_component_1.View, detail_component_1.Detail]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

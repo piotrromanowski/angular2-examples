@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', '../app.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,21 +10,28 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, app_component_1;
     var Detail;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (app_component_1_1) {
+                app_component_1 = app_component_1_1;
             }],
         execute: function() {
             Detail = (function () {
                 function Detail() {
                 }
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', app_component_1.TODO)
+                ], Detail.prototype, "todo", void 0);
                 Detail = __decorate([
                     core_1.Component({
-                        selector: '',
-                        template: ""
+                        selector: 'detail',
+                        template: "\n        <div *ngIf='todo === null' class=\"panel panel-default\">\n            <div class=\"panel-body\">\n                SELECT TODO\n            </div>\n        </div>\n        <div *ngIf='todo !== null' class=\"panel panel-default\">\n            <div class=\"panel-heading\"><h3> {{ todo.title }} </h3></div>\n            <div class=\"panel-body\">\n                <p><strong>Completed: </strong> {{ todo.complete }} </p>\n                <hr>\n                <strong>Description: </strong>\n                <p>{{ todo.description }}</p>\n            </div>\n        </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], Detail);

@@ -24,6 +24,7 @@ System.register(['angular2/core', './item.component'], function(exports_1, conte
             List = (function () {
                 function List() {
                     this.onComplete = new core_1.EventEmitter();
+                    this.getDetails = new core_1.EventEmitter();
                 }
                 List.prototype.onCheck = function (todo) {
                     this.onComplete.emit(todo);
@@ -36,10 +37,14 @@ System.register(['angular2/core', './item.component'], function(exports_1, conte
                     core_1.Output(), 
                     __metadata('design:type', Object)
                 ], List.prototype, "onComplete", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], List.prototype, "getDetails", void 0);
                 List = __decorate([
                     core_1.Component({
                         selector: 'list',
-                        template: "\n        <ul class='list-group'>\n            <li *ngFor=\"#todo of todos\" class=\"list-group-item\">\n                <item [todo]='todo' (onComplete)=\"onCheck(todo)\"></item>\n            </li>\n        </ul>\n    ",
+                        template: "\n        <ul class='list-group'>\n            <li *ngFor=\"#todo of todos\" (click)='getDetails.emit(todo)' class=\"list-group-item\">\n                <item [todo]='todo' (onComplete)=\"onCheck(todo)\"></item>\n            </li>\n        </ul>\n    ",
                         directives: [item_component_1.Item]
                     }), 
                     __metadata('design:paramtypes', [])

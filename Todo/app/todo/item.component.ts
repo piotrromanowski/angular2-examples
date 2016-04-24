@@ -9,7 +9,7 @@ import { Summary } from './pipes/summary.pipe'
             class='glyphicon'
             [class.glyphicon-check]='todo.complete' 
             [class.glyphicon-unchecked]='!todo.complete'
-            (click)="onCheck(todo)" 
+            (click)="onCheck($event)" 
         ></i>
         <h4> {{ todo.title }} </h4>
         <p> {{ todo.description | summary }} </p>
@@ -21,8 +21,9 @@ export class Item {
     
     @Output() onComplete = new EventEmitter();
     
-    onCheck() {
-        this.onComplete.emit(arguments);
+    onCheck($event) {
+        this.onComplete.emit(this.todo);
+        $event.stopPropagation();
     }
 }
 

@@ -6,7 +6,7 @@ import { Item } from './item.component'
     selector: 'list',
     template: `
         <ul class='list-group'>
-            <li *ngFor="#todo of todos" class="list-group-item">
+            <li *ngFor="#todo of todos" (click)='getDetails.emit(todo)' class="list-group-item">
                 <item [todo]='todo' (onComplete)="onCheck(todo)"></item>
             </li>
         </ul>
@@ -18,7 +18,13 @@ export class List {
     
     @Output() onComplete = new EventEmitter();
     
+    @Output() getDetails = new EventEmitter();
+    
     onCheck(todo) {
         this.onComplete.emit(todo);
     }
+    
+    // getDetails(todo) {
+    //     console.log('get details of ', todo)
+    // }
 }

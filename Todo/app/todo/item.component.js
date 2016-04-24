@@ -28,8 +28,9 @@ System.register(['angular2/core', '../app.component', './pipes/summary.pipe'], f
                 function Item() {
                     this.onComplete = new core_1.EventEmitter();
                 }
-                Item.prototype.onCheck = function () {
-                    this.onComplete.emit(arguments);
+                Item.prototype.onCheck = function ($event) {
+                    this.onComplete.emit(this.todo);
+                    $event.stopPropagation();
                 };
                 __decorate([
                     core_1.Input(), 
@@ -42,7 +43,7 @@ System.register(['angular2/core', '../app.component', './pipes/summary.pipe'], f
                 Item = __decorate([
                     core_1.Component({
                         selector: 'item',
-                        template: "\n        <i \n            class='glyphicon'\n            [class.glyphicon-check]='todo.complete' \n            [class.glyphicon-unchecked]='!todo.complete'\n            (click)=\"onCheck(todo)\" \n        ></i>\n        <h4> {{ todo.title }} </h4>\n        <p> {{ todo.description | summary }} </p>\n    ",
+                        template: "\n        <i \n            class='glyphicon'\n            [class.glyphicon-check]='todo.complete' \n            [class.glyphicon-unchecked]='!todo.complete'\n            (click)=\"onCheck($event)\" \n        ></i>\n        <h4> {{ todo.title }} </h4>\n        <p> {{ todo.description | summary }} </p>\n    ",
                         pipes: [summary_pipe_1.Summary]
                     }), 
                     __metadata('design:paramtypes', [])
